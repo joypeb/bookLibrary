@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Book">
+	<select id="mBookList" resultType="book">
+		SELECT * FROM BOOK
+	</select>
+	
+	<update id="mBookRent" parameterType="book">
+		UPDATE BOOK SET KCHECKIN = #{KCheckin},
+		NOWTIME = TO_DATE(#{NowTime},'YYYY-MM-DD HH24:MI:SS'),
+		RETURNTIME = TO_DATE(#{ReturnTime},'YYYY-MM-DD HH24:MI:SS') WHERE KNO = #{KNo}
+	</update>
+	
+	<select id="mbookCheck" resultType="book">
+		SELECT * FROM BOOK WHERE KCHECKIN = #{MId}
+	</select>
+	
+	<update id="mBookReturn" parameterType="Int">
+		UPDATE BOOK SET KCHECKIN = null, NOWTIME = null, RETURNTIME = null WHERE KNO = #{ReturnKNo}
+	</update>
+</mapper>

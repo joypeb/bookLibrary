@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	
+	<insert id="mJoin" parameterType="member">
+		INSERT INTO MEM 
+		VALUES(MEM_SEQ.NEXTVAL,#{MId},#{MPw},#{MName},#{MBirth},#{MGender},#{MPhone},#{MEmail},#{MAddr},#{MProfileName,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="mLogin" parameterType="String" resultType="member">
+		SELECT * FROM MEM WHERE MID=#{MId}
+	</select>
+	
+	
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+	<select id="mView" parameterType="String" resultType="member">
+		SELECT * FROM MEM WHERE MID=#{MId}
+	</select>
+	
+	<update id="mModify" parameterType="member">
+		UPDATE MEM SET MPW=#{MPw},MNAME=#{MName},MBIRTH=#{MBirth},MGENDER=#{MGender},MPHONE=#{MPhone},
+		MEMAIL=#{MEmail},MADDR=#{MAddr},MPROFILENAME=#{MProfileName,jdbcType=VARCHAR}
+		WHERE MID=#{MId}
+	</update>
+	
+	<delete id="mDelete" parameterType="String">
+		DELETE FROM MEM WHERE MID=#{MId}
+	</delete>
+</mapper>
+

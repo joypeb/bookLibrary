@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+
+	<insert parameterType="board" id="bWrite">INSERT INTO BOARD(BNO, BWRITER, BTITLE, BCONTENT, BDATE, BFILENAME)VALUES(BOARD_SEQ.NEXTVAL, #{BWriter}, #{BTitle}, #{BContent}, SYSDATE, #{BProfileName}) </insert>
+
+	<select id="bListCount" resultType="int">SELECT COUNT(*) FROM BOARD </select>
+
+	<select parameterType="paging" id="bList" resultType="board">SELECT * FROM BOARDLIST WHERE RN BETWEEN #{startRow} AND #{endRow} </select>
+
+	<select parameterType="int" id="bView" resultType="board"> SELECT * FROM BOARD WHERE BNO = #{BNo} </select>
+
+	<update parameterType="board" id="bModi">UPDATE BOARDSET BWRITER=#{BWriter}, BTITLE=#{BTitle}, BCONTENT=#{BContent}, BDATE = SYSDATE, BFILENAME = #{BProfileName}WHERE BNO = #{BNo} </update>
+
+	<delete parameterType="int" id="bDel">DELETE FROM BOARDWHERE BNO = #{BNo} </delete>
+
+</mapper>

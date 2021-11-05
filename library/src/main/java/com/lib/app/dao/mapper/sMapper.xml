@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Spot">
+
+	<update id="mTimeOver">UPDATE SPOT SET MTIME = 'empty' </update>
+
+	<update id="aTimeOver">UPDATE SPOT SET MTIME = 'empty', ATIME='empty'</update>
+
+	<update id="eTimeOver">UPDATE SPOT SET MTIME = 'empty', ATIME='empty', ETIME='empty' </update>
+
+	<select id="sReservNo" resultType="String" parameterType="String">SELECT * FROM SPOT WHERE SNO = #{SNo} </select>
+
+	<select id="mtimeCheck" resultType="String" parameterType="String">SELECT MTIME FROM SPOT WHERE SNO = #{SNo} </select>
+
+	<select id="atimeCheck" resultType="String" parameterType="String">SELECT ATIME FROM SPOT WHERE SNO = #{SNo} </select>
+
+	<select id="etimeCheck" resultType="String" parameterType="String">SELECT ETIME FROM SPOT WHERE SNO = #{SNo} </select>
+
+	<update id="reservMTimeR" parameterType="String">UPDATE SPOT SET MTIME = NULL WHERE SNO = #{SNo} </update>
+
+	<update id="reservMTimeP" parameterType="String">UPDATE SPOT SET MTIME = #{MId} WHERE MTIME IS NULL </update>
+
+	<select id="reservMTime" resultType="String" parameterType="String">SELECT MTIME FROM SPOT WHERE MTIME = #{MId} </select>
+
+	<!-- ATime 예약 -->
+
+
+	<update id="reservATimeR" parameterType="String">UPDATE SPOT SET ATIME = NULL WHERE SNO = #{SNo} </update>
+
+	<update id="reservATimeP" parameterType="String">UPDATE SPOT SET ATIME = #{MId} WHERE ATIME IS NULL </update>
+
+	<select id="reservATime" resultType="String" parameterType="String">SELECT ATIME FROM SPOT WHERE ATIME = #{MId} </select>
+
+	<!-- ETime 예약 -->
+
+
+	<update id="reservETimeR" parameterType="String">UPDATE SPOT SET ETIME = NULL WHERE SNO = #{SNo} </update>
+
+	<update id="reservETimeP" parameterType="String">UPDATE SPOT SET ETIME = #{MId} WHERE ETIME IS NULL </update>
+
+	<select id="reservETime" resultType="String" parameterType="String">SELECT ETIME FROM SPOT WHERE ETIME = #{MId} </select>
+
+	<select id="myReserv" resultType="Spot" parameterType="String">SELECT * FROM SPOT WHERE MTIME = #{MId} OR ETIME = #{MId} OR ATIME = #{MId} </select>
+
+	<update id="reservDel" parameterType="String">UPDATE SPOT SET MTIME = 'empty', ATIME='empty',
+		ETIME='empty'WHERE MTIME = #{MId} OR ATIME = #{MId} OR ETIME = #{MId}
+	</update>
+
+</mapper>
